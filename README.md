@@ -47,7 +47,7 @@ pip install coin-api==0.1.0
 ### Example
 
 ```python
-from coin_api import coin
+from src.coin_api import coin
 
 coin_instance = coin("bitcoin")
 print(coin_instance.give_price())
