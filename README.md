@@ -1,72 +1,108 @@
-# My Python App
+# Coin API
 
 ## Overview
-This project is a Python application that retrieves cryptocurrency price information from CoinMarketCap and Coinbase using web scraping techniques. It defines a class `coin` that interacts with these websites to fetch the latest price, market cap, and other relevant data for a specified cryptocurrency.
+A Python package for getting cryptocurrency prices from CoinMarketCap and Coinbase using web scraping techniques. The package provides both a Python API and a command-line interface for retrieving cryptocurrency price information.
+
+## Quick Start
+
+After installation, simply use the command line:
+
+```bash
+# Get Bitcoin price
+coin-price bitcoin
+
+# Get Ethereum price  
+coin-price ethereum
+
+# Get any cryptocurrency price
+coin-price <coin_name>
+```
+
+That's it! No Python code needed - just type the command and get instant cryptocurrency price information.
+
+**Note**: After installing the wheel, the package name becomes `coin_api` (with underscore) and the command `coin-price` becomes available globally.
 
 ## Installation
 
-To get started with this project, you need to install the required dependencies. You can do this by running the following command in your terminal:
-
-```
+### Install from Wheel
+```bash
+# Install dependencies first
 pip install -r requirements.txt
+
+# Build the wheel
+python -m build
+
+# Install the wheel
+pip install dist/coin_api-2.0.0-py3-none-any.whl
+```
+
+### Development Installation (for contributors)
+```bash
+pip install -e .
 ```
 
 ## Usage
 
-1. Import the `coin` class from the `src` module.
-2. Create an instance of the `coin` class by passing the cryptocurrency name (e.g., "bitcoin").
-3. Call the `give_price` method to retrieve the current price and market cap information.
+### Command Line Interface
 
-### Example
+After installation, you can use the `coin-price` command:
+
+```bash
+# Get Bitcoin price
+coin-price bitcoin
+
+# Get Ethereum price with verbose output
+coin-price ethereum --verbose
+
+# Get Dogecoin price in silent mode (no logs)
+coin-price dogecoin --silent
+```
+
+### Python API
+
+After installation, you can also use it as a Python module:
 
 ```python
-from src.coin_api import coin
+from coin_api import coin
 
-coin_instance = coin("bitcoin")
-# My Python App
+# Create a coin instance
+btc = coin("bitcoin")
 
-## Overview
-This project is a Python application that retrieves cryptocurrency price information from CoinMarketCap and Coinbase using web scraping techniques. It defines a class `coin` that interacts with these websites to fetch the latest price, market cap, and other relevant data for a specified cryptocurrency.
+# Get price information
+price_info = btc.give_price()
+print(price_info)
 
-## Installation
-
-Install the package directly with pip:
-
-```
-pip install coin-api==0.1.0
+# Silent mode (no Selenium logs)
+btc_silent = coin("bitcoin", silent=True)
+price_info = btc_silent.give_price()
 ```
 
-(If you previously installed via a requirements file, you can remove that and use the package above.)
+### Command Line Arguments
 
-## Usage
+- `coin_name`: Cryptocurrency name (required) - e.g., bitcoin, ethereum, cardano
+- `--verbose`: Enable verbose output (disable silent mode)
+- `--silent`: Enable silent mode (suppress all logs and output) - default behavior
 
-1. Import the `coin` class from the installed package (adjust import path if the package exposes a different module).
-2. Create an instance of the `coin` class by passing the cryptocurrency name (e.g., "bitcoin").
-3. Call the `give_price` method to retrieve the current price and market cap information.
+## Features
 
-### Example
-
-```python
-from src.coin_api import coin
-
-coin_instance = coin("bitcoin")
-print(coin_instance.give_price())
-```
+- **Command Line Interface**: Simple terminal command - just type `coin-price <coin_name>`
+- **Silent Mode**: Completely suppress all Selenium logs and browser output (default)
+- **Comprehensive Log Suppression**: Removes all unnecessary browser logging
+- **Error Handling**: Graceful handling of network and parsing errors
+- **Market Cap Integration**: Fetches data from both CoinMarketCap and Coinbase
+- **Easy Usage**: No need to write Python code - just use the command line
 
 ## Dependencies
 
-This project uses the `coin-api` package (installed via pip as shown above). Remove any prior manual dependency management if you switch to the pip package.
+- `selenium>=4.0.0`: For web scraping and browser automation
+- `webdriver-manager>=3.8.0`: For automatic Chrome driver management
+- `requests>=2.25.0`: For HTTP requests
 
-## License
+## Author
 
-This project is licensed under the MIT License. See the LICENSE file for more details.
-```
-
-## Dependencies
-
-This project requires the following Python packages:
-
-- `selenium`: For web scraping and browser automation.
+**faizan code**  
+Email: thetriquetradeveloper@gmail.com  
+GitHub: [thetriquetradeveloper](https://github.com/thetriquetradeveloper)
 
 ## License
 
